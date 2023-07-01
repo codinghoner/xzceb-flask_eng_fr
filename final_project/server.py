@@ -1,23 +1,27 @@
-from machinetranslation import translator
-from flask import Flask, render_template, request
+'''
+Python flask application to translate English to French and vice-versa using deep_translator
+'''
+
 import json
+from flask import Flask, render_template, request
+from machinetranslation import translator
 
 app = Flask("Web Translator")
 
 @app.route("/englishToFrench")
-def englishToFrench():
-    textToTranslate = request.args.get('textToTranslate')
-    french_word= translator.english_to_french(textToTranslate)
-    return "Translated text to French"
+def english_to_french():
+    text_to_translate = request.args.get('textToTranslate')
+    translated_text = translator.english_to_french(text_to_translate)
+    return translated_text
 
 @app.route("/frenchToEnglish")
-def frenchToEnglish():
-    textToTranslate = request.args.get('textToTranslate')
-    english_word= translator.french_to_english(textToTranslate)
-    return "Translated text to English"
+def french_to_english():
+    text_to_translate = request.args.get('textToTranslate')
+    translated_text = translator.french_to_english(text_to_translate)
+    return translated_text
 
 @app.route("/")
-def renderIndexPage():
+def render_index_page():
     return render_template('index.html')
 
 if __name__ == "__main__":
